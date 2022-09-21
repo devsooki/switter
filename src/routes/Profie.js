@@ -1,6 +1,8 @@
 import React from 'react'
-import { authService } from 'fBase'
 import { useHistory } from 'react-router-dom'
+
+// tool
+import { authService } from 'fBase'
 
 const Profile = () => {
   const hisory = useHistory()

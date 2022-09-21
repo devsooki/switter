@@ -1,6 +1,12 @@
-import { authService, firebaseInstance } from 'fBase'
-import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import React, { useState } from 'react'
+
+// tool
+import { authService } from 'fBase'
+import { 
+  createUserWithEmailAndPassword, 
+  GithubAuthProvider, GoogleAuthProvider, 
+  signInWithEmailAndPassword, signInWithPopup 
+} from 'firebase/auth'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
