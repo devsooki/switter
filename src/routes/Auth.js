@@ -19,9 +19,9 @@ const Auth = () => {
       target: {name, value} 
     } = e
 
-    if (name === "email") {
+    if (name === 'email') {
       setEmail(value)
-    } else if (name === "password") {
+    } else if (name === 'password') {
       setPassword(value)
     }
   }

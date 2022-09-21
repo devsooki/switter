@@ -24,7 +24,7 @@ function App() {
 
   return  (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : 'Initializing...'}
       <footer>&copy; {new Date().getFullYear()} Switter</footer>
     </>
   )
