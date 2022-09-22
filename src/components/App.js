@@ -5,6 +5,7 @@ import AppRouter from 'components/Router';
 
 // tool
 import { authService } from 'fBase';
+import { updateProfile } from 'firebase/auth';
 
 function App() {
   const [init, setInit] = useState(false)
@@ -16,7 +17,11 @@ function App() {
     authService.onAuthStateChanged(user => {
       if (user) {
         setIsLoggedIn(true)
-        setUserObj(user)
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: args => updateProfile(user, {displayName: user.displayName})
+        })
       } else {
         setIsLoggedIn(false)
       }
@@ -24,10 +29,22 @@ function App() {
     })
   }, [])
 
+  const refreshUser = () => {
+    const user = authService.currentUser
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      updateProfile: args => updateProfile(user, {displayName: user.displayName})
+    })
+  }
   return  (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+        <AppRouter 
+          isLoggedIn={isLoggedIn} 
+          userObj={userObj} 
+          refreshUser={refreshUser}
+        />
       ) : (
         'Initializing...'
       )}
