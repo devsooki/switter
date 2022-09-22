@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 // tool
 import { authService, dbService } from 'fBase'
-import { collection, orderBy, query, where } from 'firebase/firestore'
+import { collection, query, where } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
 
 const Profile = ({ userObj, refreshUser }) => {
