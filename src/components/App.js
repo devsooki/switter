@@ -7,6 +7,9 @@ import AppRouter from 'components/Router';
 import { authService } from 'fBase';
 import { updateProfile } from 'firebase/auth';
 
+// style
+import GlobalStyle from 'style/GlobalStyle';
+
 function App() {
   const [init, setInit] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -39,6 +42,7 @@ function App() {
   }
   return  (
     <>
+      <GlobalStyle />
       {init ? (
         <AppRouter 
           isLoggedIn={isLoggedIn} 
