@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 // tool
 import { authService } from 'fBase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import styled from 'styled-components';
 
 const AuthForm = () => {
 
@@ -43,8 +44,8 @@ const AuthForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input 
+      <Form onSubmit={onSubmit}>
+        <Input 
           name="email"
           type="email" 
           placeholder="Email" 
@@ -52,7 +53,7 @@ const AuthForm = () => {
           onChange={onChange}
           required 
         />
-        <input 
+        <Input 
           name="password"
           type="password" 
           placeholder="Password" 
@@ -60,14 +61,35 @@ const AuthForm = () => {
           onChange={onChange}
           required 
         />
-        <input type="submit" value={newAccount ? 'Create Account' : 'Sign In'} />
+        <Input type="submit" value={newAccount ? 'Create Account' : 'Sign In'} />
         {error}
-      </form>
-      <span onClick={toggleAccount}>
+      </Form>
+      <LoginText onClick={toggleAccount}>
         {newAccount ? 'Log in' : 'Create Account'} 
-      </span>
+      </LoginText>
     </>
   )
 }
 
 export default AuthForm
+
+const Form = styled.form`
+  margin: 30px 0 0;
+`
+const Input = styled.input`
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border: 0;
+
+  &[type="submit"] {
+    color: #fff;
+    background-color: #04AAFF;
+  }
+`
+const LoginText = styled.span`
+  margin: 5px 0 30px;
+  color: #04AAFF;
+  text-align: center;
+  cursor: pointer;
+`

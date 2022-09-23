@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom'
 
 // tool
 import { authService, dbService } from 'fBase'
-import { collection, query, where } from 'firebase/firestore'
+import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
+import Sweet from 'components/Sweet'
 
 const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory()
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName)
+  const [sweets, setSweets] = useState([])
 
   const onClickLogOut = () => {
     authService.signOut()
@@ -17,7 +19,13 @@ const Profile = ({ userObj, refreshUser }) => {
 
   const getMySweets = async () => {
     const q = query(collection(dbService, 'sweets'), where('creatorId', '==', userObj.uid))
-
+    onSnapshot(q, snapshot => {
+      const sweetArr = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setSweets(sweetArr)
+    })
   }
 
   const onChage = e => {
@@ -51,6 +59,14 @@ const Profile = ({ userObj, refreshUser }) => {
         <input type="submit" value="Update Profile" />
       </form>
       <button onClick={onClickLogOut}>Log Out</button>
+
+      {sweets.map(sweet => (
+        <Sweet
+          key={sweet.id} 
+          sweetObj={sweet} 
+          isOwner={sweet.creatorId === userObj.uid}
+        />
+      ))}
     </>
   )
 }

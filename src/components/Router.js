@@ -3,9 +3,9 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 // component
 import Navigation from 'components/Navigation'
-import Home from 'routes/Home'
-import Auth from 'routes/Auth'
-import Profile from 'routes/Profie'
+import Home from 'pages/Home'
+import Auth from 'pages/Auth'
+import Profile from 'pages/Profie'
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
