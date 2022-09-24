@@ -1,19 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Navigation = ({ userObj }) => {
+// style
+import styled from 'styled-components'
+
+// tool
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+
+const Navigation = () => {
   return (
-    <nav>
-      <ul>
+    <Nav>
+      <MenuList>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">
+          <FontAwesomeIcon
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+      />
+          </Link>
         </li>
         <li>
-          <Link to="/profile">{userObj.displayName} Profie</Link>
+          <Link to="/profile">
+          <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
+          </Link>
         </li>
-      </ul>
-    </nav>
+      </MenuList>
+    </Nav>
   )
 }
 
 export default Navigation
+
+const Nav = styled.nav`
+  margin: 50px auto 70px;
+  padding: 0 10px;
+  width: 350px;
+`
+const MenuList = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

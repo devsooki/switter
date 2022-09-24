@@ -6,6 +6,7 @@ import { authService, dbService } from 'fBase'
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
 import Sweet from 'components/Sweet'
+import styled from 'styled-components'
 
 const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory()
@@ -39,17 +40,25 @@ const Profile = ({ userObj, refreshUser }) => {
     e.preventDefault()
 
     if (userObj.displayName !== newDisplayName) {
-      await updateProfile(authService.currentUser, {displayName: newDisplayName})
-      refreshUser()
+      try {
+        await updateProfile(authService.currentUser, {displayName: newDisplayName})
+        refreshUser()
+        
+      } catch (error) {
+        console.log(error)
+      } finally {
+        alert('프로필이 수정되었습니다!')
+      }
     }
   }
 
   useEffect(() => {
     getMySweets()
   }, [])
+
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <Container>
+      <Form onSubmit={onSubmit}>
         <input 
           type="text" 
           placeholder="Display name" 
@@ -57,8 +66,8 @@ const Profile = ({ userObj, refreshUser }) => {
           onChange={onChage}
         />
         <input type="submit" value="Update Profile" />
-      </form>
-      <button onClick={onClickLogOut}>Log Out</button>
+      </Form>
+      <Button onClick={onClickLogOut}>Log Out</Button>
 
       {sweets.map(sweet => (
         <Sweet
@@ -67,8 +76,38 @@ const Profile = ({ userObj, refreshUser }) => {
           isOwner={sweet.creatorId === userObj.uid}
         />
       ))}
-    </>
+    </Container>
   )
 }
 
 export default Profile
+
+const Container = styled.div`
+  margin: 0 auto;
+  width: 350px;
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f2f2f2;
+
+  input[type="text"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  input[type="submit"] {
+    padding: 10px;
+    color: #fff;
+    background-color: #04AAFF;
+  }
+`
+const Button = styled.button`
+  padding: 10px;
+  width: 100%;
+  color: #fff;
+  background-color: tomato;
+`

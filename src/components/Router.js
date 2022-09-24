@@ -10,7 +10,7 @@ import Profile from 'pages/Profie'
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation userObj={userObj} /> }
+      {isLoggedIn && <Navigation /> }
       <Switch>
         {isLoggedIn ? (
           <>

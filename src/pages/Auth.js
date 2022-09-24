@@ -3,6 +3,9 @@ import React from 'react'
 // components
 import AuthForm from 'components/AuthForm'
 
+// style
+import styled from 'styled-components'
+
 // tool
 import { authService } from 'fBase'
 import { 
@@ -10,9 +13,6 @@ import {
   GoogleAuthProvider, 
   signInWithPopup 
 } from 'firebase/auth'
-
-//
-import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTwitter,
@@ -79,7 +79,6 @@ const Button = styled.button`
   padding: 10px;
   border: 0;
   background-color: #fff;
-  //border-radius: 10px;
 
   span {
     margin-right: 5px;
