@@ -68,8 +68,11 @@ const SweetFactory = ({ userObj }) => {
 
   return (
     <form onSubmit={onSubmit}>
+
+      <TextInfo>
+        {sweet.length} / 120
+      </TextInfo>
       <InputContainer>
-      
         <Input 
           value={sweet}
           onChange={onChange}
@@ -97,6 +100,11 @@ const SweetFactory = ({ userObj }) => {
 
 export default SweetFactory
 
+const TextInfo = styled.div`
+  padding: 0 0 5px;
+  font-size: 12px;
+  text-align: right;
+`
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -125,7 +133,6 @@ const Input = styled.input`
 `
 const PreviewImageContainer = styled.div`
   position: relative;
-  margin: 20px 0;
 
   img {
     width: 100%;
@@ -141,6 +148,7 @@ const PreviewImageContainer = styled.div`
 const FileInputContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin: 20px 0 50px;
 
   label {
     color: #04aaff;

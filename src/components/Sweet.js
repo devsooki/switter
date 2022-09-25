@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 import { dbService, storageService } from 'fBase'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
+import styled from 'styled-components'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Sweet = ({ sweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false)
@@ -24,7 +27,11 @@ const Sweet = ({ sweetObj, isOwner }) => {
     }
   }
 
-  const toggleEditing = () => setEditing(prev => !prev)
+  const toggleEditing = e => {
+    e.preventDefault()
+
+    setEditing(prev => !prev)
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -44,39 +51,95 @@ const Sweet = ({ sweetObj, isOwner }) => {
   }
   
   return (
-    <div>
+    <Container>
       {
         editing ? (
-          <>
-            <form onSubmit={onSubmit}>
-              <input 
-                type="text"
-                placeholder="Edit your sweet"
-                value={newSweet} 
-                onChange={onChange}
-                required 
-              />
-              <input type="submit" value="Update Sweet" />
-            </form>
-            <button onClick={toggleEditing}>Cancle</button>
-          </>
+          <EditSweetForm onSubmit={onSubmit}>
+            <Input 
+              type="text"
+              placeholder="Edit your sweet"
+              value={newSweet} 
+              onChange={onChange}
+              required 
+              autoFocus
+            />
+            <input type="submit" value="Update Sweet" className="form-button form-input" />
+            <button onClick={toggleEditing} className="form-button" >Cancle</button>
+          </EditSweetForm>
         ) : (
-          <>
-            <h4>{sweetObj.text}</h4>
-            {sweetObj.attachmentUrl && <img src={sweetObj.attachmentUrl} width="50px" height="50px" alt="sweet img" /> }
-            {
-              isOwner && (
+          <SweetContainer>
+            <SweetContent>
+              <span>{sweetObj.text}</span>
+              {isOwner && (
                 <>
-                  <button onClick={onClickDelete}>Delete Sweet</button>
-                  <button onClick={toggleEditing}>Edit Sweet</button>
+                  <button onClick={onClickDelete}>
+                    <FontAwesomeIcon 
+                      icon={faTrash} 
+                      color={'#666'} 
+                    />
+                  </button>
+                  <button onClick={toggleEditing}>
+                    <FontAwesomeIcon 
+                      icon={faPencilAlt}
+                      color={'#666'}
+                    />
+                  </button>
                 </>
-              )
-            }
-          </>
+              )}
+            </SweetContent>
+            {sweetObj.attachmentUrl && <img src={sweetObj.attachmentUrl} alt="sweet img" /> }
+          </SweetContainer>
         )
       }
-    </div>
+    </Container>
   )
 }
 
 export default Sweet
+
+const Container = styled.div`
+  margin: 0 0 20px;
+  background-color: #fff;
+`
+const EditSweetForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 0;
+
+  .form-button {
+    margin:  0 10px 10px;
+    padding: 10px;
+    color: #fff;
+    background-color: tomato;
+  }
+  .form-input {
+    background-color: #04aaff;
+  }
+`
+const Input = styled.input`
+  margin: 0 0 10px;
+  padding: 10px;
+`
+const SweetContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+  }
+`
+const SweetContent = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  
+  span {
+    flex: 1;
+    color: #666;
+  }
+  button {
+    align-self: flex-start;
+    background: none;
+  }
+`

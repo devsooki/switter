@@ -67,7 +67,6 @@ const Profile = ({ userObj, refreshUser }) => {
         />
         <input type="submit" value="Update Profile" />
       </Form>
-      <Button onClick={onClickLogOut}>Log Out</Button>
 
       {sweets.map(sweet => (
         <Sweet
@@ -76,6 +75,8 @@ const Profile = ({ userObj, refreshUser }) => {
           isOwner={sweet.creatorId === userObj.uid}
         />
       ))}
+
+      <Button onClick={onClickLogOut}>Log Out</Button>
     </Container>
   )
 }
@@ -88,7 +89,7 @@ const Container = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid #f2f2f2;
 
@@ -106,6 +107,7 @@ const Form = styled.form`
 `
 const Button = styled.button`
   padding: 10px;
+  margin: 10px 0 0;
   width: 100%;
   color: #fff;
   background-color: tomato;
