@@ -7,6 +7,7 @@ import SweetFactory from 'components/SweetFactory'
 // tool
 import { dbService } from 'fBase'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import styled from 'styled-components'
 
 const Home = ({ userObj }) => {
   const [sweets, setSweets] = useState([])
@@ -38,7 +39,7 @@ const Home = ({ userObj }) => {
   // }
 
   return (
-    <div>
+    <Container>
       <SweetFactory userObj={userObj}/>
       <div>
         {sweets.map(sweet => (
@@ -49,8 +50,12 @@ const Home = ({ userObj }) => {
           />
         ))}
       </div>
-    </div>
+    </Container>
   )
 }
 
 export default Home
+
+const Container = styled.div`
+  width: 350px;
+`

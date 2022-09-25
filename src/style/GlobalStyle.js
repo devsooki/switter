@@ -5,17 +5,20 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
+    display: flex;
+    justify-content: center;
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100vh;
     background-color: #000;
   }
   input {
     outline: none;
     border: 0;
-
-    &[type="submit"] {
-      cursor: pointer;
-    }
+  }
+  input[type="submit"] {
+    cursor: pointer;
   }
   button {
     cursor: pointer;

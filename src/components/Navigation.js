@@ -17,10 +17,10 @@ const Navigation = () => {
         <li>
           <Link to="/">
           <FontAwesomeIcon
-        icon={faTwitter}
-        color={"#04AAFF"}
-        size="3x"
-      />
+            icon={faTwitter}
+            color={'#04aaff'}
+            size='3x'
+          />
           </Link>
         </li>
         <li>
@@ -36,7 +36,7 @@ const Navigation = () => {
 export default Navigation
 
 const Nav = styled.nav`
-  margin: 50px auto 70px;
+  margin: 50px 0 70px;
   padding: 0 10px;
   width: 350px;
 `

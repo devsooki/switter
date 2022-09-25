@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+
+// tool
+import { v4 as uuidv4 } from 'uuid'
 import { dbService, storageService } from 'fBase';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid'
 import { addDoc, collection } from 'firebase/firestore';
+
+// style
+import styled from 'styled-components';
 
 const SweetFactory = ({ userObj }) => {
   const [sweet, setSweet] = useState('')
@@ -63,25 +68,82 @@ const SweetFactory = ({ userObj }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <input 
-        value={sweet}
-        onChange={onChange}
-        type="text" 
-        placeholder="What's on your mind?" 
-        maxLength={120} 
-      />
-      <input type="file" accept="image/*" onChange={onChangeFile} />
-      <input type="submit" value="Switte" />
+      <InputContainer>
+      
+        <Input 
+          value={sweet}
+          onChange={onChange}
+          type="text" 
+          placeholder="What's on your mind?" 
+          maxLength={120} 
+        />
+        <Input type="submit" value="Switte" />
+      </InputContainer>
       {
         attachment && (
-          <div>
-            <img src={attachment} width="50" height="50px" alt="sweet img" />
-            <button onClick={onClearAttachment}>Clear</button>
-          </div>
+          <PreviewImageContainer>
+            <img src={attachment} alt="sweet img" />
+            <button onClick={onClearAttachment}>✖️</button>
+          </PreviewImageContainer>
         )
       }
+      <FileInputContainer>
+        <label htmlFor="add_photo">Add Photo 📸</label>
+        <Input id="add_photo" type="file" accept="image/*" onChange={onChangeFile} />
+      </FileInputContainer>
     </form>
   )
 }
 
 export default SweetFactory
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px;
+  border: 1px solid #04aaff;
+`
+const Input = styled.input`
+  padding: 10px;
+
+  &[type="text"] {
+    flex: 1;
+    color: #04aaff;
+    background-color: #000;
+  }
+  &[type="submit"] {
+    color: #fff;
+    background-color: #04aaff;
+  }
+  &[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+`
+const PreviewImageContainer = styled.div`
+  position: relative;
+  margin: 20px 0;
+
+  img {
+    width: 100%;
+  }
+  button {
+    position: absolute;
+    top: 7px; right: 5px;
+    border: none;
+    background: none;
+    font-size: 20px;
+  }
+`
+const FileInputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  label {
+    color: #04aaff;
+    cursor: pointer;
+  }
+`

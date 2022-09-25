@@ -83,7 +83,6 @@ const Profile = ({ userObj, refreshUser }) => {
 export default Profile
 
 const Container = styled.div`
-  margin: 0 auto;
   width: 350px;
 `
 const Form = styled.form`
@@ -102,7 +101,7 @@ const Form = styled.form`
   input[type="submit"] {
     padding: 10px;
     color: #fff;
-    background-color: #04AAFF;
+    background-color: #04aaff;
   }
 `
 const Button = styled.button`

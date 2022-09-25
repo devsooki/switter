@@ -42,8 +42,8 @@ const Auth = () => {
     <Container>
       <FontAwesomeIcon
         icon={faTwitter}
-        color={"#04AAFF"}
-        size="3x"
+        color={'#04aaff'}
+        size='3x'
       />
       <AuthForm />
       <ButtonContainer>
@@ -63,7 +63,6 @@ const Auth = () => {
 export default Auth
 
 const Container = styled.div`
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
