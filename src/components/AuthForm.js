@@ -64,7 +64,7 @@ const AuthForm = () => {
           required 
         />
         <Input type="submit" value={newAccount ? 'Create Account' : 'Sign In'} />
-        {error}
+        {error !== '' && <span>{error}</span>}
       </Form>
       <LoginText onClick={toggleAccount}>
         {newAccount ? 'Log in' : 'Create Account'} 
@@ -77,6 +77,11 @@ export default AuthForm
 
 const Form = styled.form`
   margin: 30px 0 0;
+
+  span {
+    color: tomato;
+    font-size: 12px;
+  }
 `
 const Input = styled.input`
   margin-bottom: 10px;
@@ -85,6 +90,7 @@ const Input = styled.input`
   border: 0;
 
   &[type="submit"] {
+    margin-bottom: 5px;
     color: #fff;
     background-color: #04AAFF;
   }
