@@ -4,9 +4,11 @@ import React, { useState } from 'react'
 import { dbService, storageService } from 'fBase'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
-import styled from 'styled-components'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+
+// style
+import styled from 'styled-components'
 
 const Sweet = ({ sweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false)
@@ -72,16 +74,16 @@ const Sweet = ({ sweetObj, isOwner }) => {
               <span>{sweetObj.text}</span>
               {isOwner && (
                 <>
-                  <button onClick={onClickDelete}>
-                    <FontAwesomeIcon 
-                      icon={faTrash} 
-                      color={'#666'} 
-                    />
-                  </button>
                   <button onClick={toggleEditing}>
                     <FontAwesomeIcon 
                       icon={faPencilAlt}
                       color={'#666'}
+                    />
+                  </button>
+                  <button onClick={onClickDelete}>
+                    <FontAwesomeIcon 
+                      icon={faTrash} 
+                      color={'#666'} 
                     />
                   </button>
                 </>
@@ -137,6 +139,7 @@ const SweetContent = styled.div`
   span {
     flex: 1;
     color: #666;
+    word-break: break-all;
   }
   button {
     align-self: flex-start;

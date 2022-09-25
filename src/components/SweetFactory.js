@@ -16,6 +16,11 @@ const SweetFactory = ({ userObj }) => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
+    if (sweet.length === 0) {
+      alert('내용을 입력해주세요!')
+      return
+    }
+
     let attachmentUrl = ''
 
     if (attachment !== '') {
@@ -62,13 +67,13 @@ const SweetFactory = ({ userObj }) => {
     }
     reader.readAsDataURL(theFile)
   }
+  
   const onClearAttachment = () => {
     setAttachment('')
   }
 
   return (
     <form onSubmit={onSubmit}>
-
       <TextInfo>
         {sweet.length} / 120
       </TextInfo>
